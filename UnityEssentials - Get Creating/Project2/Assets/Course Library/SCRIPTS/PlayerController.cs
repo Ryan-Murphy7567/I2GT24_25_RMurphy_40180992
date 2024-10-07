@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
+{ //floats for player 
     public float speed = 10.0f;
     public float horizontalInput;
     public float xRange = 10.0f;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { //set boundaries for the player to move
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // launch a projectile from the player
-            Instantiate(projectilePrefab,transform.position,projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
     }
 }
