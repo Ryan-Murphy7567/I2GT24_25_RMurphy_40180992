@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditorInternal;
 using UnityEngine;
 public enum Combatmode {START, PLAYERTURN,ENEMYTURN, WON, LOST}
 public class combatsystem : MonoBehaviour
