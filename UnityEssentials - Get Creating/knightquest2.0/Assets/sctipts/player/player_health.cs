@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 public class Health : MonoBehaviour
 {
     public int currentHealth = 0;
     public int maxHealth = 100;
+    public Healthbar healthbar;
 
     void Start()
     { //health refreshes on combat start
@@ -26,6 +28,7 @@ public class Health : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
 
     }
     public void death() {
