@@ -1,27 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class player_controller : MonoBehaviour
 { Rigidbody2D body;
-  
 
+    public float screenborder;
     public float speed=20.0f;
     // Start is called before the first frame update
     void Start()
     { 
        body= GetComponent<Rigidbody2D>();
+       
     }
-
     // Update is called once per frame
     void Update()
-    { float horizontalInput= Input.GetAxis("Horizontal");
- 
-      float verticalInput = Input.GetAxis("Vertical");
-        Vector3 direction= new Vector3(horizontalInput, verticalInput,0);
-        transform.Translate(direction*speed*Time.deltaTime);
-    }
-   
-    
+    {
+        float horizontalInput = Input.GetAxis("Horizontal"); //movement-horizontal
+
+        float verticalInput = Input.GetAxis("Vertical"); //movement vertical
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+        transform.Translate(direction * speed * Time.deltaTime);
+        if (transform.position.x <= -8) { transform.position = new Vector3(-8, transform.position.y, -2); }
+        if (transform.position.x >= 4)
+        {
+            transform.position = new Vector3(4, transform.position.y,-2);
+        }
+        if (transform.position.y<= -6)
+        {
+            transform.position = new Vector3(transform.position.x, -6, -2);
+        }
+            if (transform.position.y>= 6)
+            {
+            transform.position = new Vector3(transform.position.x, 6, -2);
+            }
+
+        }
         
 }
