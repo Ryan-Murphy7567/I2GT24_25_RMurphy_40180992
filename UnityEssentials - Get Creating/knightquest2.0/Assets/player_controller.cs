@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class player_controller : MonoBehaviour
@@ -35,7 +36,7 @@ public class player_controller : MonoBehaviour
             {
             transform.position = new Vector3(transform.position.x, 6, -2);
             }
-
+          if (transform.position.y >= 0) {SceneManager.LoadScene("Goblinfight"); }
         }
         
 }

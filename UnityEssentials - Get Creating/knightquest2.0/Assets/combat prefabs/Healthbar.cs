@@ -12,7 +12,7 @@ public class Healthbar : MonoBehaviour
     {
      
         GameObject go = Instantiate<GameObject>(healthbar);
-        Slider slider = go.GetComponent<Slider>();
+       
     }
     public void SetMaxHealth(int health)
     {
