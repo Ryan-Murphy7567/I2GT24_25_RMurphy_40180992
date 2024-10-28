@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class unit : MonoBehaviour
 {
     //setting up values for CombatSystem to pull from
@@ -9,4 +9,5 @@ public class unit : MonoBehaviour
     public int damage;
     public int maxHP;
     public int currentHP;
+    
 }
