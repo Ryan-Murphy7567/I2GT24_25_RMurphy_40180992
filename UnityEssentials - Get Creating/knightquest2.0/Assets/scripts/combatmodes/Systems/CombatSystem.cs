@@ -1,18 +1,24 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 public enum CombatState { START,PLAYERTURN,ENEMYTURN,WON,LOST} // setting up gcombat to be turn based
 public class CombatSystem : MonoBehaviour
 {
     public CombatState State; //letting the combat state to be altered in inspector
-
+  
     public GameObject playerPrefab;// player model
     public GameObject enemyPrefab; // enemy model 
-    public GameObject playerHPBar; //healthbar currently not dynamic due to Using Unity.UI component bug
     public GameObject PlayerTurnSign;// Unity.UI Workaround asVisual studios bug is preventing me from using it
     public GameObject EnemyTurnSign;// Unity.UI Workaround asVisual studios bug is preventing me from using it
-
+    public GameObject Psign;
+    public GameObject Esign;
+    public GameObject clone;
+    public GameObject clone2;
     public Transform playerBattleStation; //player spawn point (useful later when adding multiple  characters)
     public Transform enemyBattleStation; //enemy spawn point 
     public Transform playerHealthUI; // healthbar spawn point Visual studios UI bug is preventing implementation of it scaling 
@@ -23,9 +29,11 @@ public class CombatSystem : MonoBehaviour
     unit enemyUnit;
     // Start is called before the first frame update
     void Start()
-    { //on entering turnbased combat.
+    {;
+        //on entering turnbased combat.
         State = CombatState.START;
-        SetupBattle();
+        StartCoroutine(SetupBattle());  
+                        
     }
 
     // Update is called once per frame
@@ -33,37 +41,116 @@ public class CombatSystem : MonoBehaviour
     { //spawning player in alongside useful information
       GameObject playerGO=  Instantiate(playerPrefab,playerBattleStation);
        GameObject EnemyGO= Instantiate(enemyPrefab,enemyBattleStation);
-        GameObject playerHP = Instantiate(playerHPBar, playerHealthUI);
-        GameObject enemysign = Instantiate(EnemyTurnSign, EnemyTurnSignStation);// Unity.UI Workaround asVisual studios bug is preventing me from using it
+     
+
+
+        //signs to indicate turn
+        //signs to indicate turn
+        // Unity.UI Workaround asVisual studios bug is preventing me from using it.
         playerUnit =playerGO.GetComponent<unit>();
 
         enemyUnit = EnemyGO.GetComponent<unit>();
-        yield return new WaitForSeconds(3f);
-        PlayerTurn();
+        //display text indicating player turn
+        yield return new WaitForSeconds(2);
+        State = CombatState.PLAYERTURN;
+        GameObject clone = Instantiate(PlayerTurnSign, PlayerTurnSignStation);
+        Destroy(clone, 2.0f);
+
     }
-    IEnumerator PlayerAttack() //allow the player to do damage to the enemy
-    { bool isDead= enemyUnit.TakeDamage(playerUnit.damage);                                                                                           
-        yield return new WaitForSeconds(3f);
+   IEnumerator PlayerAttack() //allow the player to do damage to the enemy
+    {
+
+        bool isDead= enemyUnit.TakeDamage(playerUnit.dmg);                                                                                           
+        
         if (isDead) // setting up a win condition for the battle
         {
             State=CombatState.WON;
-            EndBattle();
+            StartCoroutine(loadingwin());
         }
         else
         {
             State= CombatState.ENEMYTURN;
-            EnemyTurnSign();
+            GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
+            
+            yield return new WaitForSeconds(2);
+            Destroy(clone2);
+            StartCoroutine(Enemyturn() );
+            ;
+
         }
     }
+    public IEnumerator Heal() {
 
+        playerUnit.Heal(10);
+        State = CombatState.ENEMYTURN;
+        GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
+
+        yield return new WaitForSeconds(2);
+        Destroy(clone2);
+        StartCoroutine(Enemyturn());
+    }
+   public IEnumerator Death()
+    {
+
+        playerUnit.death(100);
+        State = CombatState.ENEMYTURN;
+        yield return new WaitForSeconds(2);
+        Destroy(clone2); StartCoroutine(Enemyturn());
+    }
+    IEnumerator Enemyturn()
+    { //code dialogue here
+        yield return new WaitForSeconds(2);
+        bool isDead= playerUnit.TakeDamage(enemyUnit.dmg);
+
+        if (isDead)
+        {
+            State = CombatState.LOST;
+            StartCoroutine(loadinglost());
+        }
+        else { State = CombatState.PLAYERTURN; }
+        GameObject clone = Instantiate(PlayerTurnSign, PlayerTurnSignStation);
+        Destroy(clone, 2.0f);
+        yield return new WaitForSeconds(2);
+    }
     void PlayerTurn() // letting the player know its their turn
     {
-        GameObject playersign= Instantiate(PlayerTurnSign,PlayerTurnSignStation); // Unity.UI Workaround asVisual studios bug is preventing me from using it
        
+        
     }
     public void Attackbuttonpress() //enabling the attack button to be used to take damage will also code animations etc in later build
+    { 
+        if (State != CombatState.PLAYERTURN) return;
+        GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
+        Destroy(clone2, 1.0f);
+        StartCoroutine(PlayerAttack()) ;
+    }
+    public void Healbuttonpress() //enabling the healbutton to be used to recover hp messages to be added once display.text function is fixed
     {
         if (State != CombatState.PLAYERTURN) return;
-        StartCoroutine(PlayerAttack() );
+        GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
+        Destroy(clone2, 1.0f);
+        StartCoroutine(Heal());
     }
+    public void Diebuttonpress()
+    {
+        if (State != CombatState.PLAYERTURN) return;
+        GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
+        Destroy(clone2, 1.0f);
+        StartCoroutine(Death());
+    }
+    IEnumerator loadingwin()
+        { //code display victory message
+            
+            yield return new WaitForSeconds(2);
+          if(enemyUnit.currentHP<=0) SceneManager.LoadScene("postfight");
+        }
+            
+    IEnumerator loadinglost()
+    {// code in display text for losing 
+        yield return new WaitForSeconds(2);
+        if(playerUnit.currentHP <= 0) SceneManager.LoadScene("gameoverpanel");
+
+    }
+  
+    
 }
