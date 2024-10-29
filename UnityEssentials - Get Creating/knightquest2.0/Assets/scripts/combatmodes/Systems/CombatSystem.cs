@@ -15,15 +15,16 @@ public class CombatSystem : MonoBehaviour
     public GameObject enemyPrefab; // enemy model 
     public GameObject PlayerTurnSign;// Unity.UI Workaround asVisual studios bug is preventing me from using it
     public GameObject EnemyTurnSign;// Unity.UI Workaround asVisual studios bug is preventing me from using it
-    public GameObject Psign;
-    public GameObject Esign;
-    public GameObject clone;
-    public GameObject clone2;
+    public GameObject PlayerDamageSign;//Unity.UI Workaround asVisual studios bug is preventing me from using it
+    public GameObject EnemyDamageSign;// Unity.UI Workaround asVisual studios bug is preventing me from using it
+    public GameObject PlayerHealSign;//Unity.UI Workaround asVisual studios bug is preventing me from using it
     public Transform playerBattleStation; //player spawn point (useful later when adding multiple  characters)
     public Transform enemyBattleStation; //enemy spawn point 
     public Transform playerHealthUI; // healthbar spawn point Visual studios UI bug is preventing implementation of it scaling 
     public Transform PlayerTurnSignStation;// Unity.UI Workaround asVisual studios bug is preventing me from using it
     public Transform EnemyTurnSignStation;// Unity.UI Workaround asVisual studios bug is preventing me from using it
+    public Transform PlayerDamageSignStation;// Unity.UI Workaround asVisual studios bug is preventing me from using it
+    public Transform EnemyDamageSignStation;// Unity.UI Workaround asVisual studios bug is preventing me from using it
 
     unit playerUnit;
     unit enemyUnit;
@@ -71,9 +72,10 @@ public class CombatSystem : MonoBehaviour
         {
             State= CombatState.ENEMYTURN;
             GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
-            
+            GameObject clone3 = Instantiate(PlayerDamageSign, PlayerDamageSignStation);
             yield return new WaitForSeconds(2);
             Destroy(clone2);
+            Destroy(clone3);
             StartCoroutine(Enemyturn() );
             ;
 
@@ -84,9 +86,10 @@ public class CombatSystem : MonoBehaviour
         playerUnit.Heal(10);
         State = CombatState.ENEMYTURN;
         GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
-
+        GameObject clone5= Instantiate(PlayerHealSign,PlayerDamageSignStation);
         yield return new WaitForSeconds(2);
         Destroy(clone2);
+        Destroy (clone5);
         StartCoroutine(Enemyturn());
     }
    public IEnumerator death() //allow player to die quick for an easy test of fail state
@@ -99,7 +102,7 @@ public class CombatSystem : MonoBehaviour
     }
     IEnumerator Enemyturn() //basic scripting for enemy attack
     { //code dialogue here
-        yield return new WaitForSeconds(2);
+        
         bool isDead= playerUnit.TakeDamage(enemyUnit.dmg);
 
         if (isDead)
@@ -107,10 +110,15 @@ public class CombatSystem : MonoBehaviour
             State = CombatState.LOST;
             StartCoroutine(loadinglost());
         }
-        else { State = CombatState.PLAYERTURN; }
-        GameObject clone = Instantiate(PlayerTurnSign, PlayerTurnSignStation);
-        Destroy(clone, 2.0f);
+        else
         yield return new WaitForSeconds(2);
+        { State = CombatState.PLAYERTURN; }
+        
+        GameObject clone = Instantiate(PlayerTurnSign, PlayerTurnSignStation);
+        GameObject clone4= Instantiate(EnemyDamageSign,PlayerDamageSignStation);
+        Destroy(clone, 2.0f);
+        Destroy(clone4,1.0f);
+        
     }
     void PlayerTurn() // letting the player know its their turn
     {

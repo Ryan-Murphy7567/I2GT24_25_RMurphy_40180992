@@ -232,6 +232,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1838178905}
     m_Modifications:
+    - target: {fileID: 2579549605278651054, guid: 99f4b6f8c952f144da323bf7c0b8f148, type: 3}
+      propertyPath: m_text
+      value: Press Space to return to main menu
+      objectReference: {fileID: 0}
     - target: {fileID: 3271599610347338717, guid: 99f4b6f8c952f144da323bf7c0b8f148, type: 3}
       propertyPath: m_Name
       value: 'restartgame '
