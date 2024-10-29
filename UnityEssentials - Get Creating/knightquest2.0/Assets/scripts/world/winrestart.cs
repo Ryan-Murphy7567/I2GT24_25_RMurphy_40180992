@@ -14,6 +14,6 @@ public class winrestart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)) { SceneManager.LoadScene("open world"); }
+        if(Input.GetKeyDown(KeyCode.Space)) { SceneManager.LoadScene("open world"); } //allow game restart
     }
 }

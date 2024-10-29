@@ -19,7 +19,7 @@ public class unit : MonoBehaviour
         else
             return false;
     }
-    public void Heal(int amount)
+    public void Heal(int amount) //setting up heal condition for the player or enemies later
     {
         currentHP += amount;
         if (currentHP > maxHP)

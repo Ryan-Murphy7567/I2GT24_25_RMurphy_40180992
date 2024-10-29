@@ -79,7 +79,7 @@ public class CombatSystem : MonoBehaviour
 
         }
     }
-    public IEnumerator Heal() {
+    public IEnumerator Heal() { // allow the player to heal,
 
         playerUnit.Heal(10);
         State = CombatState.ENEMYTURN;
@@ -89,15 +89,15 @@ public class CombatSystem : MonoBehaviour
         Destroy(clone2);
         StartCoroutine(Enemyturn());
     }
-   public IEnumerator Death()
+   public IEnumerator death() //allow player to die quick for an easy test of fail state
     {
 
         playerUnit.death(100);
         State = CombatState.ENEMYTURN;
         yield return new WaitForSeconds(2);
-        Destroy(clone2); StartCoroutine(Enemyturn());
+         StartCoroutine(loadinglost());
     }
-    IEnumerator Enemyturn()
+    IEnumerator Enemyturn() //basic scripting for enemy attack
     { //code dialogue here
         yield return new WaitForSeconds(2);
         bool isDead= playerUnit.TakeDamage(enemyUnit.dmg);
@@ -131,21 +131,21 @@ public class CombatSystem : MonoBehaviour
         Destroy(clone2, 1.0f);
         StartCoroutine(Heal());
     }
-    public void Diebuttonpress()
+    public void Diebuttonpress() //allow for button press to test fail state
     {
         if (State != CombatState.PLAYERTURN) return;
         GameObject clone2 = Instantiate(EnemyTurnSign, EnemyTurnSignStation);
         Destroy(clone2, 1.0f);
-        StartCoroutine(Death());
+        StartCoroutine(death());
     }
-    IEnumerator loadingwin()
+    IEnumerator loadingwin() // load the next scene and will display a message
         { //code display victory message
             
             yield return new WaitForSeconds(2);
           if(enemyUnit.currentHP<=0) SceneManager.LoadScene("postfight");
         }
             
-    IEnumerator loadinglost()
+    IEnumerator loadinglost() //load the game fail state
     {// code in display text for losing 
         yield return new WaitForSeconds(2);
         if(playerUnit.currentHP <= 0) SceneManager.LoadScene("gameoverpanel");

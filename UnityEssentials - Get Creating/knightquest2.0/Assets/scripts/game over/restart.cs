@@ -14,7 +14,7 @@ public class restart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) { SceneManager.LoadScene("Goblinfight"); }
+        if (Input.GetKeyDown(KeyCode.Space)) { SceneManager.LoadScene("Goblinfight"); } //allow to retry the fight
         
     }
 }
