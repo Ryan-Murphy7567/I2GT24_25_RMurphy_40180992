@@ -10,29 +10,32 @@ public class unit : MonoBehaviour
     public int dmg;
     public int maxHP;
     public int currentHP;
-    public int amount;
+    public int Healamount; 
     public int allhp;
+    
     public bool TakeDamage(int dmg) {
         currentHP -= dmg;
+      
 
-        if (currentHP <= 0) return true; //setting up a death condition for the player/enemy
-        else
+        if (currentHP <= 0) return true;
+        else//setting up a death condition for the player/enemy
             return false;
     }
-    public void Heal(int amount) //setting up heal condition for the player or enemies later
+    public void Heal(int Healamount) //setting up heal condition for the player or enemies later
     {
-        currentHP += amount;
+        currentHP += Healamount;
         if (currentHP > maxHP)
         {
             currentHP = maxHP;
         }
     }
     public void death(int allhp)
-    {
+    { 
         currentHP -= allhp;
         if (currentHP <= 0)
         {
             SceneManager.LoadScene("Gameoverpanel");
         }
+        
     }
 }
