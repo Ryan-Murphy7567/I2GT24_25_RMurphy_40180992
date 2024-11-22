@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 378164781676513178}
   m_Layer: 0
   m_Name: party_cassandra
-  m_TagString: Untagged
+  m_TagString: party
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
