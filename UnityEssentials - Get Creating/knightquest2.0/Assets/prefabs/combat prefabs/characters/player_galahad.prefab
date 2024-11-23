@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.736904, y: -2.0504398}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 4.6939, y: 3.4441}
   m_Pivot: {x: 0.5000002, y: 0.5000001}
 --- !u!222 &2207708883550000084
@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 7801118951885430660}
   - component: {fileID: 292075514836574230}
   - component: {fileID: 6828777650041263625}
+  - component: {fileID: 4536942493617215444}
   m_Layer: 0
   m_Name: player_galahad
   m_TagString: Player
@@ -102,8 +103,8 @@ Transform:
   m_GameObject: {fileID: 4530187526281924868}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.00000092983, y: 0.52199, z: 0}
+  m_LocalScale: {x: 2.473162, y: 4.4577575, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 703025937787621170}
@@ -150,7 +151,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: af87d6334d9427c45a0ebeb8b44df130, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -177,5 +178,26 @@ MonoBehaviour:
   dmg: 20
   maxHP: 100
   currentHP: 100
-  amount: 0
+  Healamount: 0
   allhp: 0
+--- !u!95 &4536942493617215444
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4530187526281924868}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e103e59be58fea44a3c8c82c3dc2d43, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

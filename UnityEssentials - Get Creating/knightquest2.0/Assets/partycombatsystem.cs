@@ -9,7 +9,7 @@ public enum PartyCombatState { START,PLAYERTURN,PARTYTURN,ENEMYTURN,WON,LOST}
 public class partycombatsystem : MonoBehaviour
 {
        public  PartyCombatState Partystate; //letting the combat state to be altered in inspector
-  
+  public Animator animator;
     public GameObject playerPrefab;// player model
     public GameObject partymemberPrefab;
     public GameObject enemyPrefab; // enemy model 
@@ -65,6 +65,7 @@ partyUnit = PartyGO.GetComponent<unit>();
         if (isDead)
         {
             Partystate = PartyCombatState.LOST;
+            
             StartCoroutine(loadinglost());
         }
         else
@@ -111,19 +112,20 @@ partyUnit = PartyGO.GetComponent<unit>();
 
     IEnumerator PlayerAttack() //allow the player to do damage to the enemy
             {
-                bool isDead= enemyUnit.TakeDamage(playerUnit.dmg)   ;                                                                                           
+                bool isDead= enemyUnit.TakeDamage(playerUnit.dmg);
+               
                 yield return new WaitForSeconds(2);
                 if (isDead) // setting up a win condition for the battle
-                {
+                { 
                     Partystate=PartyCombatState.WON;
                     StartCoroutine(loadingwin());
                 }
                 else
-                {
+                { animator.SetBool("ATTACKBUTTONPRESS",true);
 
                     Partystate=PartyCombatState.PARTYTURN;
                     StartCoroutine(PartyTurn() );
-                    ;
+                    
 
                 }
             }
@@ -141,6 +143,7 @@ partyUnit = PartyGO.GetComponent<unit>();
 
                 playerUnit.death(100);
                 dialogueText.text = playerUnit.unitName + "has fallen in battle";
+                animator.SetBool("NOHP",true);
                 yield return new WaitForSeconds(2);
                 StartCoroutine(loadinglost());
             }
@@ -179,7 +182,7 @@ partyUnit = PartyGO.GetComponent<unit>();
     { 
         if (Partystate != PartyCombatState.PLAYERTURN) return;
        dialogueText.text = partyUnit.unitName + "'s Turn"; 
-    
+       
         StartCoroutine(PlayerAttack()) ;
     }
     public void Healbuttonpress() //enabling the healbutton to be used to recover hp messages to be added once display.text function is fixed
