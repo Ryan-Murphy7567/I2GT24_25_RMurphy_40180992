@@ -1,0 +1,257 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
+
+public enum PartyCombatState { START,PLAYERTURN,PARTYTURN,ENEMYTURN,WON,LOST}
+public class partycombatsystem : MonoBehaviour
+{
+       public  PartyCombatState Partystate; //letting the combat state to be altered in inspector
+  
+    public GameObject playerPrefab;// player model
+    public GameObject partymemberPrefab;
+    public GameObject enemyPrefab; // enemy model 
+    public Transform playerBattleStation; //player spawn point (useful later when adding multiple  characters)
+    public Transform enemyBattleStation; //enemy spawn point 
+    public Transform partyBattleStation;
+    public Text dialogueText;
+    public float enemychoice = 0f; 
+    unit playerUnit;
+    unit partyUnit;
+    unit enemyUnit;
+     public Animator playerAnimator;
+     public Animator partyAnimator;
+     public Animator enemyaAnimator;
+   public void Start()
+    {
+        //on entering turnbased combat.
+        Partystate = PartyCombatState.START;
+        StartCoroutine(SetupBattle());  
+                        
+    }
+
+    // Update is called once per frame
+  IEnumerator SetupBattle()
+    { //spawning player in alongside useful information
+      GameObject playerGO=  Instantiate(playerPrefab,playerBattleStation);
+       GameObject EnemyGO= Instantiate(enemyPrefab,enemyBattleStation);
+       GameObject PartyGO= Instantiate(partymemberPrefab,partyBattleStation);
+       
+     dialogueText.text = "The battle begins";
+
+
+      
+        playerUnit =playerGO.GetComponent<unit>();
+partyUnit = PartyGO.GetComponent<unit>();
+        enemyUnit = EnemyGO.GetComponent<unit>();
+        playerAnimator = playerGO.GetComponent<Animator>();
+        partyAnimator = PartyGO.GetComponent<Animator>();
+        enemyaAnimator = EnemyGO.GetComponent<Animator>();
+        //display text indicating player turn
+        yield return new WaitForSeconds(2);
+        dialogueText.text = "Galahad's turn";
+        Partystate = PartyCombatState.PLAYERTURN;
+
+    }
+    // ReSharper disable Unity.PerformanceAnalysis
+    
+    // ReSharper disable Unity.PerformanceAnalysis
+
+
+     IEnumerator Enemyturn() //basic scripting for enemy attack
+
+    {
+        enemyaAnimator.SetBool("attackplayer", true);
+        yield return new WaitForSeconds(2);
+        
+        bool isDead = playerUnit.TakeDamage(enemyUnit.dmg);
+
+        if (isDead)
+        {  enemyaAnimator.SetBool("attackplayer",false);
+            Partystate = PartyCombatState.LOST;
+            playerAnimator.SetBool("NOHP", true);
+            yield return new WaitForSeconds(2);
+            
+            StartCoroutine(loadinglost());
+        }
+        else
+        { dialogueText.text = enemyUnit.unitName + " hit " + playerUnit.unitName + " for " + enemyUnit.dmg + " damage";
+            yield return new WaitForSeconds(2);
+            enemyaAnimator.SetBool("attackplayer", false);
+            StartCoroutine(PlayerTurn());
+            yield return new WaitForSeconds(2);
+            Partystate = PartyCombatState.PLAYERTURN;
+        }
+    }
+
+    IEnumerator Enemyattackparty()
+        {
+           
+            enemyaAnimator.SetBool("attackparty", true);
+            bool isDead = partyUnit.TakeDamage(enemyUnit.dmg);
+            yield return new WaitForSeconds(2);
+
+            if (isDead)
+            { enemyaAnimator.SetBool("attackparty", false);
+                partyAnimator.SetBool("lancedead", true);
+                Partystate = PartyCombatState.LOST;
+                StartCoroutine(loadinglost());
+            }
+            else
+            { dialogueText.text = enemyUnit.unitName + " hit " + partyUnit.unitName + " for " + enemyUnit.dmg + " damage"; 
+                enemyaAnimator.SetBool("attackparty", false);
+                yield return new WaitForSeconds(2);
+                StartCoroutine(PlayerTurn());
+                yield return new WaitForSeconds(2);
+                Partystate= PartyCombatState.PLAYERTURN;
+            }
+        }
+    IEnumerator Enemychoice()
+    { dialogueText.text = enemyUnit.unitName + "'s Turn";
+        enemychoice = Random.Range(1, 10);
+        
+        if (enemychoice >= 5)
+        {
+            dialogueText.text = enemyUnit.unitName + " attacks " + playerUnit.unitName;
+            yield return new WaitForSeconds(4);
+            StartCoroutine(Enemyturn());
+        }
+        else
+        {
+            dialogueText.text = enemyUnit.unitName + " attacks " + partyUnit.unitName;
+            yield return new WaitForSeconds(4);
+            StartCoroutine(Enemyattackparty());
+        }
+    }
+
+    IEnumerator PlayerAttack() //allow the player to do damage to the enemy
+            {   
+                bool isDead= enemyUnit.TakeDamage(playerUnit.dmg);
+                playerAnimator.SetBool("ATTACK", true);
+                
+                yield return new WaitForSeconds(2);
+                if (isDead) // setting up a win condition for the battle
+                { enemyaAnimator.SetBool("dead", true);
+                    Partystate = PartyCombatState.WON;
+                    StartCoroutine(loadingwin());
+                }
+                else
+                { 
+
+                    Partystate = PartyCombatState.PARTYTURN;
+                    playerAnimator.SetBool("ATTACK", false);
+                    dialogueText.text = playerUnit.unitName + " hit " + enemyUnit.unitName + " for " + playerUnit.dmg + " damage";
+                    yield return new WaitForSeconds(2);
+                    StartCoroutine(PartyTurn() );
+                    
+
+                }
+            }
+
+             IEnumerator Heal() { // allow the player to heal,
+
+                playerUnit.Heal(10);
+                dialogueText.text = playerUnit.unitName + " was healed for " + playerUnit.Healamount+ " HP";
+                Partystate = PartyCombatState.PARTYTURN;
+                yield return new WaitForSeconds(2);
+                StartCoroutine(PartyTurn());
+            }
+             IEnumerator death() //allow player to die quick for an easy test of fail state
+            {
+
+                playerUnit.death(100);
+                dialogueText.text = playerUnit.unitName + "has fallen in battle";
+                yield return new WaitForSeconds(2);
+                playerAnimator.SetBool("NOHP", true);
+                yield return new WaitForSeconds(2);
+                StartCoroutine(loadinglost());
+            }
+        
+        public IEnumerator PartyTurn()
+        {
+            dialogueText.text=partyUnit.unitName + "'s Turn";
+            yield return new WaitForSeconds(2);
+            partyAnimator.SetBool("attackenemy", true);
+            bool isDead = enemyUnit.TakeDamage(partyUnit.dmg);
+            
+            if (isDead)
+            {   dialogueText.text= partyUnit.unitName + " hit "+ enemyUnit.unitName + " for " + partyUnit.dmg+" damage";
+                partyAnimator.SetBool("attackenemy",false);
+                yield return new WaitForSeconds(2);
+                enemyaAnimator.SetBool("dead",true);
+                yield return new WaitForSeconds(2);
+                Partystate = PartyCombatState.WON;
+                    StartCoroutine(loadingwin());
+            }
+            else
+            {   Partystate = PartyCombatState.ENEMYTURN;
+                dialogueText.text= partyUnit.unitName + " hit "+ enemyUnit.unitName + " for " + partyUnit.dmg+" damage";
+                yield return new WaitForSeconds(2);
+                partyAnimator.SetBool("attackenemy", false);
+                StartCoroutine(Enemychoice());
+                
+              
+            }
+        }
+         
+       
+     
+        
+    
+
+    IEnumerator PlayerTurn() // letting the player know its their turn
+    { 
+       
+        dialogueText.text = playerUnit.unitName + "'s turn"; 
+        yield return new WaitForSeconds(2);
+        Partystate = PartyCombatState.PLAYERTURN;
+    }
+    public void Attackbuttonpress() //enabling the attack button to be used to take damage will also code animations etc in later build
+    { 
+        if (Partystate != PartyCombatState.PLAYERTURN) return;
+        
+       dialogueText.text = playerUnit.unitName + " Attacks"; 
+        StartCoroutine(PlayerAttack()) ;
+    }
+    public void Healbuttonpress() //enabling the healbutton to be used to recover hp messages to be added once display.text function is fixed
+    {
+        if (Partystate != PartyCombatState.PLAYERTURN) return;
+      
+        StartCoroutine(Heal());
+    }
+    public void Diebuttonpress() //allow for button press to test fail state
+    {
+        if (Partystate != PartyCombatState.PLAYERTURN) return;
+  
+      
+        StartCoroutine(death());
+    } 
+    IEnumerator loadingwin() // load the next scene and will display a message
+        { //code display victory message
+            dialogueText.text = "Victory achieved";
+            yield return new WaitForSeconds(2);
+          if(enemyUnit.currentHP<=0) SceneManager.LoadScene("postfight");
+        }
+            
+     public IEnumerator loadinglost() //load the game fail state
+     {
+         dialogueText.text = "You lost " + enemyUnit.unitName + " laughs at your attempt";
+        playerAnimator.SetBool("NOHP", true);
+        partyAnimator.SetBool("lancedead",true);
+        yield return new WaitForSeconds(4);
+         SceneManager.LoadScene("gameoverpanel");
+
+    }
+ }
+
+   
+
+    
+    
+
+
+
