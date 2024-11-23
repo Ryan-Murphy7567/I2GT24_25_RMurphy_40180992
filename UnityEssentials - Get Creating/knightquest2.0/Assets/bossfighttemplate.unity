@@ -122,6 +122,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &93056431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 93056432}
+  m_Layer: 0
+  m_Name: enemy_finalboss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &93056432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93056431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0000023841858, y: -0.0000011920929, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &115725386
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +242,7 @@ Transform:
   m_GameObject: {fileID: 276762457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.75, y: -3.46, z: -0.32}
+  m_LocalPosition: {x: -11, y: 0, z: -0.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -757,7 +788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Partystate: 0
-  animator: {fileID: 0}
   playerPrefab: {fileID: 4530187526281924868, guid: 2f6d8a34ada4fff4b86cc02e9c0e826a, type: 3}
   partymemberPrefab: {fileID: 1601090273328651667, guid: bc2de59f3dfaf5743b82fc647a0e3a13, type: 3}
   enemyPrefab: {fileID: 8252765932699907049, guid: 82e8a69676c3e0d459c6e9d39c4a2a51, type: 3}
@@ -766,6 +796,7 @@ MonoBehaviour:
   partyBattleStation: {fileID: 603253808}
   dialogueText: {fileID: 7180617133928727543}
   enemychoice: 0
+  playerAnimator: {fileID: 0}
 --- !u!1 &1307038007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1097,7 @@ GameObject:
   - component: {fileID: 1888807631}
   - component: {fileID: 1888807630}
   m_Layer: 0
-  m_Name: 059
+  m_Name: bossbackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1113,7 +1144,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f68081b3f74d0a94eaf348ae01016fc6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 935a4070e98995d429fcb3f7d1f1063a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1133,8 +1164,8 @@ Transform:
   m_GameObject: {fileID: 1888807629}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5552769, y: -0.47138524, z: 0}
-  m_LocalScale: {x: 1.275, y: 0.85, z: 1}
+  m_LocalPosition: {x: -0.047, y: 0.0091, z: 0}
+  m_LocalScale: {x: 1.1969177, y: 0.81538534, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1703,7 +1734,6 @@ GameObject:
   - component: {fileID: 7462421397901548437}
   - component: {fileID: 8354881486600225278}
   - component: {fileID: 8354881486600225279}
-  - component: {fileID: 8354881486600225280}
   m_Layer: 5
   m_Name: playerStatsText
   m_TagString: Untagged
@@ -2629,18 +2659,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &8354881486600225280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2542296010734546325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e58ad9b7b706e46abd53d3168623f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8447746428136904886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2756,3 +2774,4 @@ SceneRoots:
   - {fileID: 1573337187}
   - {fileID: 1795976624676838214}
   - {fileID: 1888807631}
+  - {fileID: 93056432}

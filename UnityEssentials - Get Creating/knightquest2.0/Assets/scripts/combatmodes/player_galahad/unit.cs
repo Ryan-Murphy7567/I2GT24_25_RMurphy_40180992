@@ -12,7 +12,7 @@ public class unit : MonoBehaviour
     public int currentHP;
     public int Healamount; 
     public int allhp;
-    
+   public Animator animator;
     public bool TakeDamage(int dmg) {
         currentHP -= dmg;
       
@@ -32,10 +32,7 @@ public class unit : MonoBehaviour
     public void death(int allhp)
     { 
         currentHP -= allhp;
-        if (currentHP <= 0)
-        {
-            SceneManager.LoadScene("Gameoverpanel");
-        }
+        
         
     }
 }

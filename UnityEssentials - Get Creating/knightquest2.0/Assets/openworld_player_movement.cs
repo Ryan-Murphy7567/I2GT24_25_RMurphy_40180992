@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class openworld_player_movement : MonoBehaviour
 {
-    
-        Rigidbody2D body;
+
+    Rigidbody2D body;
 
     public float screenborder;
 
@@ -27,13 +27,5 @@ public class openworld_player_movement : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical"); //movement vertical
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
         transform.Translate(direction * speed * Time.deltaTime);
-    }
-
-    public void OnCollisionEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("bounds"));
-        {
-            speed = 0.0f;
-        }
     }
 }
