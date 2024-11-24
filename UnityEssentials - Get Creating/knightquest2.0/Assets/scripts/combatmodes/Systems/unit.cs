@@ -13,7 +13,9 @@ public class unit : MonoBehaviour
     public int Healamount; 
     public int allhp;
    public Animator animator;
-    public bool TakeDamage(int dmg) {
+    public bool TakeDamage(int dmg)
+    { dmg = Random.Range(10,20);
+        this.dmg = dmg;
         currentHP -= dmg;
       
 

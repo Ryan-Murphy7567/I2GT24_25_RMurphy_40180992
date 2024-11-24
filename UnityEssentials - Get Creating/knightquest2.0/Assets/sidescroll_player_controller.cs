@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class SidescrollPlayerController : MonoBehaviour
-{
+{ //this script will allow the player to navigate the enviornment in the 2d levels. platforming/jumping to be added for final build.
     public float speed = 20.0f;
     public Animator animator;
     private Vector2 direction;

@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 730afd13caddb6949b14e46e822f4122, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300012, guid: f2ed27d6c1c3ccc48959bcca269d88f0, type: 3}
+  m_Sprite: {fileID: 21300012, guid: 04be9d6b30a29d043b1b1ca9ac75aebb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Lance
   dmg: 20
-  maxHP: 99
-  currentHP: 100
+  maxHP: 1
+  currentHP: 1
   Healamount: 10
   allhp: 0
   animator: {fileID: 0}
@@ -115,7 +115,7 @@ Animator:
   m_GameObject: {fileID: 4161609182444489948}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e4fe486bdb2255148b7aa4583510d3ce, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8d9c0ce06fd63004facaa04446d2c38b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 public class dialoguewindow : MonoBehaviour
-{ const string KalphaCode = "<color=#00000000>";
+{ //this script is used to allow dialogue to appear and disappear on certain triggers and adds a scrolling effect using the alphaIndex function and TMPro
+    const string KalphaCode = "<color=#00000000>";
     public TMP_Text Text;
     private string currentText;
     private const float MaxTextTime = 0.1f;

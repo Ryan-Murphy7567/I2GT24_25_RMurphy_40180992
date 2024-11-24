@@ -6,12 +6,13 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 
 using UnityEngine.UI; 
 public enum CombatState { START,PLAYERTURN,ENEMYTURN,WON,LOST} // setting up gcombat to be turn based
 public class CombatSystem : MonoBehaviour
-{
+{ //this script is used for instances of 1v1 combat such as the prologue and first fight before partry members are added. 
     public CombatState State; //letting the combat state to be altered in inspector
   
     public GameObject playerPrefab;// player model
@@ -21,11 +22,13 @@ public class CombatSystem : MonoBehaviour
   
     public Text dialogueText;
 
-    unit playerUnit;
+    unit playerUnit; // to read 
     unit enemyUnit;
-    // Start is called before the first frame update
+    movement playerMovement;
+    public Animator enemyaAnimator; // animator for enemy
+    public Animator playerAnimator; //animator for player
     void Start()
-    {;
+    {
         //on entering turnbased combat.
         State = CombatState.START;
         StartCoroutine(SetupBattle());  
@@ -43,9 +46,12 @@ public class CombatSystem : MonoBehaviour
         //signs to indicate turn
         //signs to indicate turn
         // Unity.UI Workaround asVisual studios bug is preventing me from using it.
+        
         playerUnit =playerGO.GetComponent<unit>();
-
         enemyUnit = EnemyGO.GetComponent<unit>();
+        playerMovement = playerGO.GetComponent<movement>();
+        playerAnimator = playerGO.GetComponent<Animator>();
+        enemyaAnimator = EnemyGO.GetComponent<Animator>();
         //display text indicating player turn
         yield return new WaitForSeconds(2);
         dialogueText.text = "Galahad's turn";
@@ -57,10 +63,13 @@ public class CombatSystem : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     IEnumerator PlayerAttack() //allow the player to do damage to the enemy
     {
-        bool isDead= enemyUnit.TakeDamage(playerUnit.dmg)   ;                                                                                           
+        bool isDead= enemyUnit.TakeDamage(playerUnit.dmg);
+        playerAnimator.SetBool("ATTACK", true);
         yield return new WaitForSeconds(2);
+        playerMovement.ismoving = false;
         if (isDead) // setting up a win condition for the battle
         {
+            enemyaAnimator.SetBool("dead", true);
             State=CombatState.WON;
             StartCoroutine(loadingwin());
         }
@@ -68,6 +77,10 @@ public class CombatSystem : MonoBehaviour
         {
 
             State=CombatState.ENEMYTURN;
+            playerAnimator.SetBool("ATTACK", false);
+            dialogueText.text = playerUnit.unitName + " hit " + enemyUnit.unitName + " for " + playerUnit.dmg +
+                                " damage ";
+            yield return new WaitForSeconds(3);
             StartCoroutine(Enemyturn() );
             ;
 
@@ -76,7 +89,7 @@ public class CombatSystem : MonoBehaviour
     public IEnumerator Heal() { // allow the player to heal,
 
         playerUnit.Heal(10);
-        dialogueText.text = playerUnit.unitName + " was healed";
+        dialogueText.text = playerUnit.unitName + " was healed for " + playerUnit.Healamount+ " HP";
         State = CombatState.ENEMYTURN;
         yield return new WaitForSeconds(2);
         StartCoroutine(Enemyturn());
@@ -94,15 +107,24 @@ public class CombatSystem : MonoBehaviour
     {
         
         dialogueText.text= enemyUnit.unitName+"'s Turn";
+        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2);
+        enemyaAnimator.SetBool("attackplayer", true);
+        yield return new WaitForSeconds(2);
         bool isDead = playerUnit.TakeDamage(enemyUnit.dmg);
 
         if (isDead)
-        {
+        { enemyaAnimator.SetBool("attackplayer",false);
             State = CombatState.LOST;
+            playerAnimator.SetBool("NOHP", true);
+            yield return new WaitForSeconds(2);
             StartCoroutine(loadinglost());
         }
         else
-        {
+        { dialogueText.text = enemyUnit.unitName + " hit " + playerUnit.unitName + " for " + enemyUnit.dmg + " damage";
+            enemyaAnimator.SetBool("attackplayer", false);
+            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(2);
             StartCoroutine(PlayerTurn());
             yield return new WaitForSeconds(2);
             State = CombatState.PLAYERTURN;
@@ -126,8 +148,7 @@ public class CombatSystem : MonoBehaviour
     public void Attackbuttonpress() //enabling the attack button to be used to take damage will also code animations etc in later build
     { 
         if (State != CombatState.PLAYERTURN) return;
-       dialogueText.text = enemyUnit.unitName + "'s Turn"; 
-    
+      
         StartCoroutine(PlayerAttack()) ;
     }
     public void Healbuttonpress() //enabling the healbutton to be used to recover hp messages to be added once display.text function is fixed
@@ -151,14 +172,15 @@ public class CombatSystem : MonoBehaviour
         }
             
     IEnumerator loadinglost() //load the game fail state
-    {// code in display text for losing 
+    {
+        dialogueText.text = "You lost " + enemyUnit.unitName + " laughs at your attempt";
+        playerAnimator.SetBool("NOHP", true);
         yield return new WaitForSeconds(2);
         if(playerUnit.currentHP <= 0) SceneManager.LoadScene("gameoverpanel");
 
     }
 
-   
-
+    
     
     
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 using TMPro;
 
 public class lance_collision : MonoBehaviour
-{
+{ //this script is used as a dialogue trigger and will be repurposed for future cutscenes. 
     public dialoguewindow dialogue;
     public SidescrollPlayerController player;
     public string DialogueText;
