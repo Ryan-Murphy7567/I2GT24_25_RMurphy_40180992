@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -27,6 +28,13 @@ public class SidescrollPlayerController : MonoBehaviour
     {
         direction = new Vector2(Input.GetAxis("Horizontal"), 0).normalized; //movement HORIZONTAL
         animator.SetFloat("speed", MathF.Abs(direction.magnitude * speed));
+
+        if (rb.velocity == Vector2.zero)
+        {
+            animator.SetFloat("speed", 0);
+        }
+        
+        
 animator.SetBool("running",true);
 
         bool flip = direction.x < 0;

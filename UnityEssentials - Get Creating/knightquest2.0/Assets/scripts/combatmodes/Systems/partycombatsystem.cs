@@ -15,9 +15,7 @@ public class partycombatsystem : MonoBehaviour
     public GameObject playerPrefab;// player model
     public GameObject partymemberPrefab;
     public GameObject enemyPrefab; // enemy model 
-    public Transform playerBattleStation; //player spawn point (useful later when adding multiple  characters)
-    public Transform enemyBattleStation; //enemy spawn point 
-    public Transform partyBattleStation;
+    
     public Text dialogueText;
     public float enemychoice = 0f; 
     unit playerUnit;
@@ -37,20 +35,16 @@ public class partycombatsystem : MonoBehaviour
     // Update is called once per frame
   IEnumerator SetupBattle()
     { //spawning player in alongside useful information
-      GameObject playerGO=  Instantiate(playerPrefab,playerBattleStation);
-       GameObject EnemyGO= Instantiate(enemyPrefab,enemyBattleStation);
-       GameObject PartyGO= Instantiate(partymemberPrefab,partyBattleStation);
+     
        
      dialogueText.text = "The battle begins";
 
-
-      
-        playerUnit =playerGO.GetComponent<unit>();
-partyUnit = PartyGO.GetComponent<unit>();
-        enemyUnit = EnemyGO.GetComponent<unit>();
-        playerAnimator = playerGO.GetComponent<Animator>();
-        partyAnimator = PartyGO.GetComponent<Animator>();
-        enemyaAnimator = EnemyGO.GetComponent<Animator>();
+     playerUnit =playerPrefab.GetComponent<unit>();
+     enemyUnit = enemyPrefab.GetComponent<unit>();
+     playerAnimator = playerPrefab.GetComponent<Animator>();
+     enemyaAnimator = enemyPrefab.GetComponent<Animator>();
+     partyUnit = partymemberPrefab.GetComponent<unit>();
+     partyAnimator = partymemberPrefab.GetComponent<Animator>();
         //display text indicating player turn
         yield return new WaitForSeconds(2);
         dialogueText.text = "Galahad's turn";
@@ -175,12 +169,13 @@ partyUnit = PartyGO.GetComponent<unit>();
         {
             dialogueText.text=partyUnit.unitName + "'s Turn";
             yield return new WaitForSeconds(2);
-            partyAnimator.SetBool("attackenemy", true);
+            partyAnimator.SetBool("attackplayer", true);
+            yield return new WaitForSeconds(2);
             bool isDead = enemyUnit.TakeDamage(partyUnit.dmg);
             
             if (isDead)
             {   dialogueText.text= partyUnit.unitName + " hit "+ enemyUnit.unitName + " for " + partyUnit.dmg+" damage";
-                partyAnimator.SetBool("attackenemy",false);
+                partyAnimator.SetBool("attackplayer",false);
                 yield return new WaitForSeconds(2);
                 enemyaAnimator.SetBool("dead",true);
                 yield return new WaitForSeconds(2);
@@ -191,7 +186,7 @@ partyUnit = PartyGO.GetComponent<unit>();
             {   Partystate = PartyCombatState.ENEMYTURN;
                 dialogueText.text= partyUnit.unitName + " hit "+ enemyUnit.unitName + " for " + partyUnit.dmg+" damage";
                 yield return new WaitForSeconds(2);
-                partyAnimator.SetBool("attackenemy", false);
+                partyAnimator.SetBool("attackplayer", false);
                 StartCoroutine(Enemychoice());
                 
               
@@ -234,7 +229,7 @@ partyUnit = PartyGO.GetComponent<unit>();
         { //code display victory message
             dialogueText.text = "Victory achieved";
             yield return new WaitForSeconds(2);
-          if(enemyUnit.currentHP<=0) SceneManager.LoadScene("postfight");
+          if(enemyUnit.currentHP<=0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
             
      public IEnumerator loadinglost() //load the game fail state

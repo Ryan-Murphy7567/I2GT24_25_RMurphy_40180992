@@ -13,10 +13,16 @@ public class displaystats : MonoBehaviour
     void Start()
     {
         playerUnit = player.GetComponent<unit>();
+        int value = playerUnit.currentHP;
+        StatText.text = playerUnit.unitName + " : " + "current HP : " + value + " / " + playerUnit.maxHP;
     }
 
+    public void Update()
+    {
+        
+    }
     // Update is called once per frame
-    void Update()
+     public void Statsupdate()
     {
         StatText.text = playerUnit.unitName + " : " + "current HP : " + playerUnit.currentHP + " / " + playerUnit.maxHP;
     }

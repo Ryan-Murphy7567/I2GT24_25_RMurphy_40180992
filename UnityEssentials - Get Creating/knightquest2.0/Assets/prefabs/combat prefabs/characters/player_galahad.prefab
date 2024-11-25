@@ -181,7 +181,9 @@ MonoBehaviour:
   currentHP: 100
   Healamount: 10
   allhp: 0
+  currentHPText: {fileID: 0}
   animator: {fileID: 0}
+  healthbar: {fileID: 1268674754543698308, guid: 754838680e490ab4bb632718fc5dc955, type: 3}
 --- !u!95 &4536942493617215444
 Animator:
   serializedVersion: 5

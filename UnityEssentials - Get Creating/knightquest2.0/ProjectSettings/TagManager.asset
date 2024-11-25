@@ -8,6 +8,7 @@ TagManager:
   - party
   - wall
   - ground
+  - playerhealthbar
   layers:
   - Default
   - TransparentFX

@@ -17,16 +17,16 @@ public class CombatSystem : MonoBehaviour
   
     public GameObject playerPrefab;// player model
     public GameObject enemyPrefab; // enemy model 
-    public Transform playerBattleStation; //player spawn point (useful later when adding multiple  characters)
-    public Transform enemyBattleStation; //enemy spawn point 
-  
+     //player spawn point (useful later when adding multiple  characters)
+     //enemy spawn point 
     public Text dialogueText;
-
     unit playerUnit; // to read 
     unit enemyUnit;
     movement playerMovement;
     public Animator enemyaAnimator; // animator for enemy
     public Animator playerAnimator; //animator for player
+    private float speed= 20.0f;
+    
     void Start()
     {
         //on entering turnbased combat.
@@ -38,20 +38,19 @@ public class CombatSystem : MonoBehaviour
     // Update is called once per frame
   IEnumerator SetupBattle()
     { //spawning player in alongside useful information
-      GameObject playerGO=  Instantiate(playerPrefab,playerBattleStation);
-       GameObject EnemyGO= Instantiate(enemyPrefab,enemyBattleStation);
+  
+      
      dialogueText.text = "The battle begins";
 
 
-        //signs to indicate turn
-        //signs to indicate turn
-        // Unity.UI Workaround asVisual studios bug is preventing me from using it.
+       
         
-        playerUnit =playerGO.GetComponent<unit>();
-        enemyUnit = EnemyGO.GetComponent<unit>();
-        playerMovement = playerGO.GetComponent<movement>();
-        playerAnimator = playerGO.GetComponent<Animator>();
-        enemyaAnimator = EnemyGO.GetComponent<Animator>();
+        playerUnit =playerPrefab.GetComponent<unit>();
+        enemyUnit = enemyPrefab.GetComponent<unit>();
+        playerMovement = playerPrefab.GetComponent<movement>();
+        playerAnimator = playerPrefab.GetComponent<Animator>();
+        enemyaAnimator = enemyPrefab.GetComponent<Animator>();
+            
         //display text indicating player turn
         yield return new WaitForSeconds(2);
         dialogueText.text = "Galahad's turn";
@@ -64,6 +63,7 @@ public class CombatSystem : MonoBehaviour
     IEnumerator PlayerAttack() //allow the player to do damage to the enemy
     {
         bool isDead= enemyUnit.TakeDamage(playerUnit.dmg);
+      
         playerAnimator.SetBool("ATTACK", true);
         yield return new WaitForSeconds(2);
         playerMovement.ismoving = false;
@@ -82,7 +82,7 @@ public class CombatSystem : MonoBehaviour
                                 " damage ";
             yield return new WaitForSeconds(3);
             StartCoroutine(Enemyturn() );
-            ;
+            
 
         }
     }
@@ -129,12 +129,6 @@ public class CombatSystem : MonoBehaviour
             yield return new WaitForSeconds(2);
             State = CombatState.PLAYERTURN;
         }
-            
-        
-       
-         
-       
-     
         
     }
 
@@ -168,7 +162,7 @@ public class CombatSystem : MonoBehaviour
         { //code display victory message
             dialogueText.text = "Victory achieved";
             yield return new WaitForSeconds(2);
-          if(enemyUnit.currentHP<=0) SceneManager.LoadScene("postfight");
+          if(enemyUnit.currentHP<=0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
             
     IEnumerator loadinglost() //load the game fail state
