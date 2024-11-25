@@ -9,6 +9,7 @@ TagManager:
   - wall
   - ground
   - playerhealthbar
+  - Music
   layers:
   - Default
   - TransparentFX

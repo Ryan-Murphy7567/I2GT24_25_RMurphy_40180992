@@ -138,7 +138,15 @@ public class partycombatsystem : MonoBehaviour
 
                     Partystate = PartyCombatState.PARTYTURN;
                     playerAnimator.SetBool("ATTACK", false);
-                    dialogueText.text = playerUnit.unitName + " hit " + enemyUnit.unitName + " for " + playerUnit.dmg + " damage";
+                    yield return new WaitForSeconds(2);
+                    if (enemyUnit.currentHP == enemyUnit.maxHP)
+                    {
+                        dialogueText.text = playerUnit.unitName + " drew first blood";
+                    }
+                    else
+                    {
+                        dialogueText.text = playerUnit.unitName + " hit " + enemyUnit.unitName + " for " + playerUnit.dmg + " damage";
+                    } ;
                     yield return new WaitForSeconds(2);
                     StartCoroutine(PartyTurn() );
                     
@@ -170,7 +178,6 @@ public class partycombatsystem : MonoBehaviour
             dialogueText.text=partyUnit.unitName + "'s Turn";
             yield return new WaitForSeconds(2);
             partyAnimator.SetBool("attackplayer", true);
-            yield return new WaitForSeconds(2);
             bool isDead = enemyUnit.TakeDamage(partyUnit.dmg);
             
             if (isDead)

@@ -25,7 +25,6 @@ public class CombatSystem : MonoBehaviour
     movement playerMovement;
     public Animator enemyaAnimator; // animator for enemy
     public Animator playerAnimator; //animator for player
-    private float speed= 20.0f;
     
     void Start()
     {

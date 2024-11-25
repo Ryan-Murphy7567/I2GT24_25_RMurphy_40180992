@@ -17,17 +17,20 @@ public class unit : MonoBehaviour
 
    void Start()
    {
-       currentHP = maxHP;
        healthbar.SetMaxHealth(maxHP);
    }
    
    public bool TakeDamage(int dmg)
-    { dmg = Random.Range(10,20);
-        this.dmg = dmg;
+    { this.dmg = Random.Range(10,20);
+        
         currentHP -= dmg;
       healthbar.SetHealth(currentHP);
 
-      if (currentHP <= 0) return true;
+      if (currentHP <= 0)
+      {
+          currentHP = 0;
+          return true;
+      }
       else //setting up a death condition for the player/enemy
           return false;
     }
