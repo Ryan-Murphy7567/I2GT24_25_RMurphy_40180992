@@ -39,7 +39,7 @@ public class CombatSystem : MonoBehaviour
     { //spawning player in alongside useful information
   
       
-     dialogueText.text = "The battle begins";
+     dialogueText.text = "The battle begins"; //getting components for the fight
 
 
        
@@ -113,16 +113,15 @@ public class CombatSystem : MonoBehaviour
         bool isDead = playerUnit.TakeDamage(enemyUnit.dmg);
 
         if (isDead)
-        { enemyaAnimator.SetBool("attackplayer",false);
+        { enemyaAnimator.SetBool("attackplayer",false); //animation
             State = CombatState.LOST;
-            playerAnimator.SetBool("NOHP", true);
+            playerAnimator.SetBool("NOHP", true); //animation 
             yield return new WaitForSeconds(2);
             StartCoroutine(loadinglost());
         }
         else
         { dialogueText.text = enemyUnit.unitName + " hit " + playerUnit.unitName + " for " + enemyUnit.dmg + " damage";
             enemyaAnimator.SetBool("attackplayer", false);
-            yield return new WaitForSeconds(2);
             yield return new WaitForSeconds(2);
             StartCoroutine(PlayerTurn());
             yield return new WaitForSeconds(2);
@@ -166,7 +165,7 @@ public class CombatSystem : MonoBehaviour
             
     IEnumerator loadinglost() //load the game fail state
     {
-        dialogueText.text = "You lost " + enemyUnit.unitName + " laughs at your attempt";
+        dialogueText.text = "You lost " + enemyUnit.unitName + " laughs at your attempt"; //game over text
         playerAnimator.SetBool("NOHP", true);
         yield return new WaitForSeconds(2);
         if(playerUnit.currentHP <= 0) SceneManager.LoadScene("gameoverpanel");

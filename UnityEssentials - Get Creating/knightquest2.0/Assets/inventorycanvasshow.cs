@@ -6,7 +6,7 @@ using UnityEngine;
 public class inventorycanvasshow : MonoBehaviour
 {
     public CanvasGroup InventoryCanvasGroup;
-
+// another inventory script.
     GameObject inventorycanvas;
 
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ DestroySelf();
     }
 
   
-    void DestroySelf()
+    void DestroySelf() //incase object needs destroyed
     {
         Destroy(gameObject);
     }

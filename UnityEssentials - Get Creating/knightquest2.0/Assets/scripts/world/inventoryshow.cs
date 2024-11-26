@@ -4,15 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 public class inventoryshow : MonoBehaviour
-{ private CanvasGroup group;
-    // Start is called before the first frame update
-    void Start()
-    {
-        group = GetComponent<CanvasGroup>();
-        group.alpha = 0;
-    }
-
-    // Update is called once per frame
+{ public CanvasGroup group; //script to show inventory on button press
     public void onInventoryButtonPress()
     { 
         show();
@@ -20,6 +12,6 @@ public class inventoryshow : MonoBehaviour
 
     public void show()
     {
-        group.alpha = 1;
+        group.alpha += 1;
     }
 }

@@ -9,7 +9,7 @@ public class runepickup : MonoBehaviour
 
     GameObject inventorySlotcanvas;
 public Text displayText;
-    // Start is called before the first frame update
+    // this script is for picking up each of the runes that i will be using in my inventory to enable them to be seen 
     void Start()
     {
         InventorySlotCanvasGroup = inventorySlotcanvas.GetComponent<CanvasGroup>();

@@ -25,16 +25,16 @@ nextlevel.alpha = 1;
        
     }
 
-    public void onnextlevelbuttonpress()
+    public void onnextlevelbuttonpress() //load next level button 
     {
         loadnextscene();
     }
-    public void loadnextscene()
+    public void loadnextscene() // what the load scene button will enable
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     // Update is called once per frame
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other) //not used currently but will be for cutscenes in final build
     {
         if (other.tag == "Player")
         {

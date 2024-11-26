@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class camera_followsplayer : MonoBehaviour
-{
+{ //script to have the camera follow the player in the sidescrolling levels 
     // Start is called before the first frame update
     public Transform player;
     public Vector3 offset;

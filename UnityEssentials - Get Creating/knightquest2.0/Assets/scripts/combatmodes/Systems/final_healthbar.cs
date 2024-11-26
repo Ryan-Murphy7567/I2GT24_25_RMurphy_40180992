@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class final_healthbar : MonoBehaviour
-{ 
+{  //basic healthbar script this is the one used
     public Slider slider;
 
 

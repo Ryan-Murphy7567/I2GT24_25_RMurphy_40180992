@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
-
+// party combat system which has since been built on for the final boss fight however this will be used in combat until then.
 public enum PartyCombatState { START,PLAYERTURN,PARTYTURN,ENEMYTURN,WON,LOST}
 public class partycombatsystem : MonoBehaviour
 {
@@ -82,7 +82,7 @@ public class partycombatsystem : MonoBehaviour
         }
     }
 
-    IEnumerator Enemyattackparty()
+    IEnumerator Enemyattackparty() //enemy attack party member 
         {
            
             enemyaAnimator.SetBool("attackparty", true);
@@ -104,7 +104,7 @@ public class partycombatsystem : MonoBehaviour
                 Partystate= PartyCombatState.PLAYERTURN;
             }
         }
-    IEnumerator Enemychoice()
+    IEnumerator Enemychoice() //penemy choice
     { dialogueText.text = enemyUnit.unitName + "'s Turn";
         enemychoice = Random.Range(1, 10);
         
