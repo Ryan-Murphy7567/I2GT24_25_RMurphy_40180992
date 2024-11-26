@@ -14,4 +14,5 @@ public class inventoryshow : MonoBehaviour
     {
         group.alpha += 1;
     }
+    
 }

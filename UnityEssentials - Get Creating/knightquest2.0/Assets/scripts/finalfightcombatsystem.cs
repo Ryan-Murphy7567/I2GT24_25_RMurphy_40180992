@@ -80,7 +80,7 @@ Inventory.SetActive(true);
         enemyaAnimator.SetBool("attackplayer", true);
         Inventorybutton.SetActive(true);
         yield return new WaitForSeconds(2);
-        dialogueText.text = "Ulrich attacks Lance for 250 damage";
+        dialogueText.text = "Ulrich attacks Lance for 100 damage";
         yield return new WaitForSeconds(2);
         enemyaAnimator.SetBool("attackplayer", false);
         partyAnimator.SetBool("dead", true);

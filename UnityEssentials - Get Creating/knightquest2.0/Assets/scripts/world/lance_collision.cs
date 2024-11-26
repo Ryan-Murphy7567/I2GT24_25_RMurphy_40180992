@@ -21,10 +21,17 @@ public Animator animator;
             dialogue.show(DialogueText);
             Script.enabled = false;
 nextlevel.alpha = 1;
+StartCoroutine(loadnextlevel());
+
         } 
        
     }
 
+    IEnumerator loadnextlevel()
+    {
+        yield return new WaitForSeconds(20);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
     public void onnextlevelbuttonpress() //load next level button 
     {
         loadnextscene();

@@ -23,18 +23,7 @@ public class unit : MonoBehaviour
    }
    
    public bool TakeDamage(int dmg)
-   { 
-        if (runecount > 0) //giving players more power after using runes
-        {
-            this.dmg = Random.Range(20, 30); //creating dynamic damage to make fights more unpredictable but not pure luck
-            
-        }
-        else
-        {
-            this.dmg = Random.Range(10,20);
-
-        }
-        
+   {
         this.dmg = Random.Range(10,20);
         
         currentHP -= dmg;
@@ -53,13 +42,9 @@ public class unit : MonoBehaviour
     if (critchance > 80) return true;
     else return false;
 }
-    public bool NoDamage(int noDmg)
-    {
-        currentHP -= noDmg;
-        return true;
-    }
+    
     public void Heal(int Healamount) //setting up heal condition for the player or enemies later
-    {
+    { 
         currentHP += Healamount;
         if (currentHP > maxHP)
         {
