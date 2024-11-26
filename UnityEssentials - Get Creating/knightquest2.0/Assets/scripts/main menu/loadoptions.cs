@@ -31,4 +31,9 @@ public class Begingame : MonoBehaviour
         SceneManager.LoadScene("bossfight");
         ;
     }
+
+    public void Startgame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

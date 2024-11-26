@@ -11,30 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/final scenes/mainmenu.unity
     guid: 28156b6097cc9f14ab9a8c16801f9ca3
-  - enabled: 0
-    path: Assets/Scenes/open world.unity
-    guid: fc12884f8a83d294d9626459cc145c06
-  - enabled: 0
-    path: Assets/Scenes/Goblinfight.unity
-    guid: 52222d1f4e09478478ff2741adc97f6e
-  - enabled: 0
-    path: Assets/Scenes/postfight.unity
-    guid: a08f5300e967dd748b83ed4fa3e225a8
-  - enabled: 1
-    path: Assets/Scenes/gameoverpanel.unity
-    guid: 23fe9c7309f5d0f4ab270e0323d2d11f
-  - enabled: 1
-    path: Assets/Scenes/final scenes/Options.unity
-    guid: 7ae41616f6e8a3f47aa5ed801631db1b
-  - enabled: 1
-    path: Assets/Scenes/knownissues.unity
-    guid: e0ea5a5ac1158444c8337ab90af24034
   - enabled: 1
     path: Assets/Scenes/final scenes/placeholderfirstfight.unity
     guid: 3a7163c207fe3a144a2a3e58d400e06d
-  - enabled: 0
-    path: Assets/Scenes/final scenes/introlevelone.unity
-    guid: 0da4259c54a76da49b7210754488d8a7
   - enabled: 1
     path: Assets/Scenes/final scenes/levelone.unity
     guid: 1a0c3bd5a3d07734d8d7260d1fec74e4
@@ -56,10 +35,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/final scenes/bossfight.unity
     guid: c1a08dfb0b28caf4293075e65cdb6619
-  - enabled: 0
-    path: Assets/Scenes/final scenes/princess rescue.unity
-    guid: c4f06f5f6e9121e40a22fcac3b50f0fa
   - enabled: 1
     path: Assets/Scenes/final scenes/winscreen.unity
     guid: dea0077d21cdf01488cb7ed0566a8fb3
+  - enabled: 1
+    path: Assets/Scenes/gameoverpanel.unity
+    guid: 23fe9c7309f5d0f4ab270e0323d2d11f
+  - enabled: 1
+    path: Assets/Scenes/final scenes/Options.unity
+    guid: 7ae41616f6e8a3f47aa5ed801631db1b
+  - enabled: 1
+    path: Assets/Scenes/knownissues.unity
+    guid: e0ea5a5ac1158444c8337ab90af24034
   m_configObjects: {}
