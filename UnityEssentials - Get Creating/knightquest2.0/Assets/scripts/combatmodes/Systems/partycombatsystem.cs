@@ -104,7 +104,7 @@ public class partycombatsystem : MonoBehaviour
                 Partystate= PartyCombatState.PLAYERTURN;
             }
         }
-    IEnumerator Enemychoice() //penemy choice
+    IEnumerator Enemychoice() //enemy choice of who it will attack may play with probabilities for final submission
     { dialogueText.text = enemyUnit.unitName + "'s Turn";
         enemychoice = Random.Range(1, 10);
         

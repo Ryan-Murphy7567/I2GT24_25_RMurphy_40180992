@@ -5657,7 +5657,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -900.7, y: 369.59}
+  m_AnchoredPosition: {x: -900.69995, y: 369.59}
   m_SizeDelta: {x: -1801.4, y: -739.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529599838
@@ -6242,7 +6242,7 @@ SpriteRenderer:
   m_Size: {x: 2.56, y: 2.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1688955007
@@ -6403,7 +6403,7 @@ SpriteRenderer:
   m_Size: {x: 4, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!222 &1380454801311252176
@@ -6684,8 +6684,11 @@ MonoBehaviour:
   currentHP: 100
   Healamount: 0
   allhp: 0
+  samuraiSummons: 0
   animator: {fileID: 0}
   healthbar: {fileID: 0}
+  runecount: 0
+  critchance: 0
 --- !u!4 &7045920656099750528
 Transform:
   m_ObjectHideFlags: 0
@@ -6749,8 +6752,11 @@ MonoBehaviour:
   currentHP: 1
   Healamount: 10
   allhp: 0
+  samuraiSummons: 0
   animator: {fileID: 0}
   healthbar: {fileID: 0}
+  runecount: 0
+  critchance: 0
 --- !u!212 &9074608814310961096
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6800,7 +6806,7 @@ SpriteRenderer:
   m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &9074608814310961097

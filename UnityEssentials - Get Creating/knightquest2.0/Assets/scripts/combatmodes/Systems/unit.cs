@@ -27,7 +27,7 @@ public class unit : MonoBehaviour
         this.dmg = Random.Range(10,20);
         
         currentHP -= dmg;
-      healthbar.SetHealth(currentHP); //adjusting sliders
+      healthbar.SetHealth(currentHP); //adjusting sliders but need to look at the system for final submission as some seem to not reflect the dmg sometimes
 
       if (currentHP <= 0)
       {
@@ -37,7 +37,7 @@ public class unit : MonoBehaviour
       else //setting up a death condition for the player/enemy
           return false;
     }
- public bool criticalHit(){ //creating a crithit chance 
+ public bool criticalHit(){ //creating a crithit chance will be added for final submission
     critchance = Random.Range(1, 100);
     if (critchance > 80) return true;
     else return false;

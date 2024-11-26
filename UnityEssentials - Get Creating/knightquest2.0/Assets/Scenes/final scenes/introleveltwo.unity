@@ -11562,7 +11562,7 @@ SpriteRenderer:
   m_Size: {x: 13.44, y: 4.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &175403973
@@ -11988,7 +11988,7 @@ SpriteRenderer:
   m_Size: {x: 13.44, y: 4.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &463817241
@@ -12144,7 +12144,7 @@ SpriteRenderer:
   m_Size: {x: 13.44, y: 4.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &633471065
@@ -12297,7 +12297,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1103267375
@@ -12538,7 +12538,7 @@ SpriteRenderer:
   m_Size: {x: 13.44, y: 4.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1226911169
@@ -12573,6 +12573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98e7f08f33e63d4bae64f15874e4fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: {fileID: 0}
 --- !u!225 &1231932926
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -12651,7 +12652,7 @@ SpriteRenderer:
   m_Size: {x: 13.44, y: 4.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1253183796
@@ -13049,7 +13050,7 @@ SpriteRenderer:
   m_Size: {x: 2.56, y: 2.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1688955007
@@ -13133,7 +13134,7 @@ SpriteRenderer:
   m_Size: {x: 13.44, y: 4.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1879480818
@@ -13237,7 +13238,7 @@ SpriteRenderer:
   m_Size: {x: 4, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!222 &1380454801311252176
@@ -13582,8 +13583,11 @@ MonoBehaviour:
   currentHP: 100
   Healamount: 0
   allhp: 0
+  samuraiSummons: 0
   animator: {fileID: 0}
   healthbar: {fileID: 0}
+  runecount: 0
+  critchance: 0
 --- !u!4 &7045920656099750528
 Transform:
   m_ObjectHideFlags: 0
@@ -13618,8 +13622,11 @@ MonoBehaviour:
   currentHP: 1
   Healamount: 10
   allhp: 0
+  samuraiSummons: 0
   animator: {fileID: 0}
   healthbar: {fileID: 0}
+  runecount: 0
+  critchance: 0
 --- !u!212 &9074608814310961096
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13669,7 +13676,7 @@ SpriteRenderer:
   m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &9074608814310961097

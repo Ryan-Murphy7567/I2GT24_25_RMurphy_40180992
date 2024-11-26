@@ -897,14 +897,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Known Issues:\nUI in combat not working as intended due to Visual Studios
-    not recognising UnityEngine.UI- Workaround pop ups in place  \n\nCamera in Combat
-    scene is too zoomed out- will fix for Beta \n\nPlayer can Get multiple Actions
-    in on their turn- Coding a new Combatstate to wait will resolve did not have
-    time for Alpha submission.\n\nIssues with Colliders not triggering- have removed
-    and am just using Transform function as triggers to Load scenes in Game. Will
-    fix Collision issues and Use for final build. Player must walk up to The Goblin
-    and Princess to load next scenes"
+  m_text: "Known Issues:\nCertain scenes would work in Unity but would not run on
+    webGL i have deactivated them from this build but they are fully functional and
+    can be seen if the project is opened in unity these are primarily surrounding
+    the first rune.\n\nCamera in Combat scene is too zoomed out- will fix for Beta-
+    the opposite was present for this submission have zoomed out to compensate. \n\nthe
+    delay before entering combat in some cases is too long= next scene button is
+    currently not showing on webgl build but is on unity version\n\nPlayer can Get
+    multiple Actions in on their turn- decided to keep this as it makes it easier
+    for testing but will remove for final submission.\n\nIssues with Colliders not
+    triggering- resolved."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

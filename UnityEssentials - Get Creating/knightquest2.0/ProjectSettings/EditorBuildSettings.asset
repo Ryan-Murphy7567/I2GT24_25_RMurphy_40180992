@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/final scenes/placeholderfirstfight.unity
     guid: 3a7163c207fe3a144a2a3e58d400e06d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/final scenes/levelone.unity
     guid: 1a0c3bd5a3d07734d8d7260d1fec74e4
   - enabled: 1
@@ -39,12 +39,12 @@ EditorBuildSettings:
     path: Assets/Scenes/final scenes/winscreen.unity
     guid: dea0077d21cdf01488cb7ed0566a8fb3
   - enabled: 1
-    path: Assets/Scenes/gameoverpanel.unity
+    path: Assets/Scenes/final scenes/gameoverpanel.unity
     guid: 23fe9c7309f5d0f4ab270e0323d2d11f
   - enabled: 1
     path: Assets/Scenes/final scenes/Options.unity
     guid: 7ae41616f6e8a3f47aa5ed801631db1b
   - enabled: 1
-    path: Assets/Scenes/knownissues.unity
+    path: Assets/Scenes/final scenes/knownissues.unity
     guid: e0ea5a5ac1158444c8337ab90af24034
   m_configObjects: {}

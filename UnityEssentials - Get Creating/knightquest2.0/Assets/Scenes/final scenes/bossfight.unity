@@ -1156,6 +1156,10 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 67818975}
+    - target: {fileID: 6828777650041263625, guid: 5fb51a354d2994b45be92654b5e82126, type: 3}
+      propertyPath: samuraiSummons
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7801118951885430660, guid: 5fb51a354d2994b45be92654b5e82126, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.59
@@ -1996,7 +2000,7 @@ Camera:
   far clip plane: 1000
   field of view: 67.6
   orthographic: 1
-  orthographic size: 6.5877905
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2255,7 +2259,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 747810874}
   SummonPrefab: {fileID: 977613693}
   Inventory: {fileID: 1217881279991923212}
-  Inventorybutton: {fileID: 173166590}
+  RunesButton: {fileID: 173166590}
   attackbutton: {fileID: 1410371997607222660}
   healthbutton: {fileID: 3237526778137984126}
   dialogueText: {fileID: 7180617133928727543}

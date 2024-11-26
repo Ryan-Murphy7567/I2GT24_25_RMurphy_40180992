@@ -29,7 +29,7 @@ public class finalfightcombatsystem : MonoBehaviour
     public GameObject enemyPrefab; // enemy model 
     public GameObject SummonPrefab;
     public GameObject Inventory;
-    public GameObject Inventorybutton;
+    public GameObject RunesButton;
     public GameObject attackbutton;
     public GameObject healthbutton;
     public Text dialogueText;
@@ -50,6 +50,7 @@ CanvasGroup SummonCanvas;
         Partystate = FinalPartyCombatState.START;
         StartCoroutine(SetupBattle());
 Inventory.SetActive(true);
+RunesButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -78,7 +79,6 @@ Inventory.SetActive(true);
     IEnumerator Firstsalvoattack() //scripted encounter to start the final boss fight and to encourage the rune use also breaks the pattern of the player attacking first
     { 
         enemyaAnimator.SetBool("attackplayer", true);
-        Inventorybutton.SetActive(true);
         yield return new WaitForSeconds(2);
         dialogueText.text = "Ulrich attacks Lance for 100 damage";
         yield return new WaitForSeconds(2);
@@ -95,13 +95,14 @@ Inventory.SetActive(true);
 
     public void UseRunes()
     {  Partystate = FinalPartyCombatState.PLAYERTURN;
+        RunesButton.SetActive(true);
         bool Runeclear = playerUnit.RuneClear(); //check to make sure runes are used
         if (Runeclear)
         {
             dialogueText.text = "All runes have been used. Finish the fight and rescue the princess"; // if so 
             StartCoroutine(PlayerTurn());
         }
-        dialogueText.text = "Use the runes to Damage Ulrich";
+       
     }
     IEnumerator Enemyturn() //basic scripting for enemy attack
 
@@ -334,16 +335,7 @@ Inventory.SetActive(true);
     public IEnumerator SummonSamurai() // inventory item to summon another ally temporarily
     {
         {
-            bool issamurai = playerUnit.SamuraiSummonscount(); //bool to limit uses of the summon incase i want to use more in future.
-            if (issamurai)
-            {
-                dialogueText.text = "The Spirit rests as the runes power has faded"; //letting player know there are no more uses
-                yield return new WaitForSeconds(2);
-                UseRunes();
-            }
-
-            else //actual summon loop and way to hide it on other turns
-            {
+           
                 dialogueText.text = "An Old enemy becomes an ally";
                 yield return new WaitForSeconds(2);
                 SummonPrefab.SetActive(true); //enabling summon
@@ -360,8 +352,7 @@ Inventory.SetActive(true);
                 summonAnimator.SetBool("dead", false); //summon returning to idle for next summon even if invisible
                 
                 UseRunes();
-
-            }
+                
         }
        
     }
